@@ -1,5 +1,6 @@
 import * as pug from 'pug';
 import * as path from 'path';
+import { pluginPath } from '../documentation-loader';
 
 interface ComponentVariables {
   markdown: string;
@@ -33,7 +34,10 @@ type Template = (variables: TemplateVariables) => string;
 type TemplateRender = (variables: TemplateRenderVariables) => string;
 type Code = (variables: CodeVariables) => string;
 
-const DOCUMENTATION_DIRECTORY = path.resolve(__dirname, '../../src/documentation');
+const DOCUMENTATION_DIRECTORY = path.resolve(
+  pluginPath(),
+  'render',
+);
 
 export const component: Component = pug.compileFile(path.resolve(DOCUMENTATION_DIRECTORY, 'component.pug'));
 export const template: Template = pug.compileFile(path.resolve(DOCUMENTATION_DIRECTORY, 'template.pug'));
